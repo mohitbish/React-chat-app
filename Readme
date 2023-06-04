@@ -1,0 +1,7 @@
+Public 
+    npx create-react-app chat-app
+
+Server
+    npm init
+    npm i express mongoose nodemon socket.io bcrypt cors dotenv
+    add {"start": "nodemon index.js"} to scripts in package.json

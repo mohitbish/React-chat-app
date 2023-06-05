@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import styled from "styled-components";
 import { useNavigate, Link } from "react-router-dom";
 import Logo from "../Assets/logo.svg";
 import { ToastContainer, toast } from "react-toastify";
@@ -11,6 +10,7 @@ import "../Styles/Login.css"
 export default function Login() {
   const navigate = useNavigate();
   const [values, setValues] = useState({ username: "", password: "" });
+
   const toastOptions = {
     position: "bottom-right",
     autoClose: 8000,
@@ -18,6 +18,7 @@ export default function Login() {
     draggable: true,
     theme: "dark",
   };
+
   useEffect(() => {
     if (localStorage.getItem(process.env.REACT_APP_LOCALHOST_KEY)) {
       navigate("/");
@@ -63,11 +64,11 @@ export default function Login() {
   };
 
   return (
-    <>
+    
       <div  className="FormContainer">
         <form action="" onSubmit={(event) => handleSubmit(event)}>
           <div className="brand">
-            <img src={Logo} alt="logo" />
+            <img className="img" src={Logo} alt="logo" />
             <h1>snappy</h1>
           </div>
           <input
@@ -88,9 +89,9 @@ export default function Login() {
             Don't have an account ? <Link to="/register">Create One.</Link>
           </span>
         </form>
+        <ToastContainer />
       </div>
-      <ToastContainer />
-    </>
+
   );
 }
 

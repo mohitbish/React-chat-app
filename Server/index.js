@@ -3,6 +3,7 @@ const cors = require("cors");
 const mongoose = require("mongoose");
 const app = express();
 const socket = require("socket.io");
+const authRoutes = require("./Routes/Auth");
 require("dotenv").config();
 
 app.use(cors());
@@ -19,6 +20,8 @@ mongoose
   .catch((err) => {
     console.log(err.message);
   });
+
+app.use("/api/auth", authRoutes);
 
 
 

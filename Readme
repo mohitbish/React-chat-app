@@ -1,5 +1,6 @@
 Public 
     npx create-react-app chat-app
+    yarn add axios styled-components react-router-dom
 
 Server
     npm init

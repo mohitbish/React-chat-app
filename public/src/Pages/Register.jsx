@@ -6,6 +6,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Logo from "../Assets/logo.svg";
 import "../Styles/Register.css"
+import registerRoute from "../Utils/APIRoutes"
 
 
 function Register() {
@@ -64,7 +65,10 @@ function Register() {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        handleValidation()
+        if(handleValidation()){
+            
+
+        }
     };
     
 

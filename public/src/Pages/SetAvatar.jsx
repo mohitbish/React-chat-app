@@ -75,9 +75,7 @@ export default function SetAvatar() {
   return (
     <div className="Container">
       {isLoading ? (
-        
           <img  src={loader} alt="loader" className="loader" />
-        
       ) : (
         <div classname ="Container">
           <div className="title-container">
@@ -86,12 +84,8 @@ export default function SetAvatar() {
           <div className="avatars">
             {avatars.map((avatar, index) => {
               return (
-                <div
-                  className={`avatar ${
-                    selectedAvatar === index ? "selected" : ""
-                  }`}
-                >
-                  <img
+                <div className={`avatar ${selectedAvatar === index ? "selected" : ""}`}>
+                  <img className="img"
                     src={`data:image/svg+xml;base64,${avatar}`}
                     alt="avatar"
                     key={avatar}

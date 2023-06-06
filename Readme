@@ -2,6 +2,7 @@ Public
     npx create-react-app chat-app
     yarn add axios styled-components react-router-dom
     yarn add react-toastify
+    yarn add buffer
 
 Server
     npm init

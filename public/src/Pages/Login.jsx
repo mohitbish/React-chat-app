@@ -66,7 +66,7 @@ export default function Login() {
         <form action="" onSubmit={(event) => handleSubmit(event)}>
           <div className="brand">
             <img className="img" src={Logo} alt="logo" />
-            <h1>snappy</h1>
+            <h1>V-CHAT</h1>
           </div>
           <input
             type="text"

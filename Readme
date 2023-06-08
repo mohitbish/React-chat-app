@@ -3,6 +3,8 @@ Public
     yarn add axios styled-components react-router-dom
     yarn add react-toastify
     yarn add buffer
+    yarn add react-icons
+    yarn add emoji-picker-react
 
 Server
     npm init

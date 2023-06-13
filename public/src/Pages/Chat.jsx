@@ -35,7 +35,6 @@ function Chat() {
     }
   }, [currentUser]);
 
-
   useEffect(() => {
     (async () => {
       if (currentUser) {
@@ -57,11 +56,11 @@ function Chat() {
     <>
     <Container>
       <div className="container">
-      <Contacts contacts={contacts} changeChat={handleChatChange} socket={socket}/>
+      <Contacts contacts={contacts} changeChat={handleChatChange} />
           {currentChat === undefined ? (
             <Welcome />
           ) : (
-            <ChatContainer currentChat={currentChat}  />
+            <ChatContainer currentChat={currentChat} socket={socket}  />
           )}
         
       </div>

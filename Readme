@@ -5,8 +5,10 @@ Public
     yarn add buffer
     yarn add react-icons
     yarn add  emoji-picker-react@3.5.1  // css confilts with latest version
+    yarn add socket.io-client
 
 Server
     npm init
     npm i express mongoose nodemon socket.io bcrypt cors dotenv
-    add {"start": "nodemon index.js"} to scripts in package.json
+    //add {"start": "nodemon index.js"} to scripts in package.json
+    yarn add socket.io

@@ -8,7 +8,7 @@ function Messages() {
 }
 
 const Container = styled.div`
-    
+    height: 80%;
 `;
 
 export default Messages

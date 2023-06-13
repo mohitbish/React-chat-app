@@ -4,7 +4,7 @@ Public
     yarn add react-toastify
     yarn add buffer
     yarn add react-icons
-    yarn add emoji-picker-react
+    yarn add  emoji-picker-react@3.5.1  // css confilts with latest version
 
 Server
     npm init

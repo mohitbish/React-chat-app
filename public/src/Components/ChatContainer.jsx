@@ -2,26 +2,69 @@ import React, { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
 import ChatInput from "./ChatInput";
 import Logout from "./Logout";
-import { sendMessageRoute } from "../Utils/APIRoutes";
+import { sendMessageRoute,recieveMessageRoute } from "../Utils/APIRoutes";
 import { v4 as uuidv4 } from "uuid";
 import axios from "axios";
 
 
 
-export default function ChatContainer({ currentChat, currentUser }) {
+export default function ChatContainer({ currentChat }) {
+
+  const [messages, setMessages] = useState([]);
+  const scrollRef = useRef();
+  const [arrivalMessage, setArrivalMessage] = useState(null);
+
+  useEffect(() => {
+    (async () => {
+      const data = await JSON.parse(
+        localStorage.getItem("chat-app-current-user")
+      );
+      const response = await axios.post(recieveMessageRoute, {
+        from: data._id,
+        to: currentChat._id,
+      });
+      setMessages(response.data);
+    })();
+  }, [currentChat])
+
+  useEffect(() => {
+    (async () => {
+      const getCurrentChat = async () => {
+        if (currentChat) {
+          await JSON.parse(
+            localStorage.getItem("chat-app-current-user")
+          )._id;
+        }
+      };
+      getCurrentChat();
+    })();
+  }, [currentChat])
   
 
-  const handleSendMsg = async(msg)=>{
+  const handleSendMsg = async (msg) => {
     const data = await JSON.parse(
       localStorage.getItem("chat-app-current-user")
     );
+    
     await axios.post(sendMessageRoute, {
       from: data._id,
       to: currentChat._id,
       message: msg,
     });
 
-  }
+    const msgs = [...messages];
+    msgs.push({ fromSelf: true, message: msg });
+    setMessages(msgs);
+  };
+
+  useEffect(() => {
+    arrivalMessage && setMessages((prev) => [...prev, arrivalMessage]);
+  }, [arrivalMessage]);
+
+  useEffect(() => {
+    scrollRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [messages]);
+
 
   return (
     <Container>
@@ -40,7 +83,21 @@ export default function ChatContainer({ currentChat, currentUser }) {
           <Logout />
         </div>
       <div className="chat-messages">
-        
+        {messages.map((message) => {
+            return (
+              <div ref={scrollRef} key={uuidv4()}>
+                <div
+                  className={`message ${
+                    message.fromSelf ? "sended" : "recieved"
+                  }`}
+                >
+                  <div className="content ">
+                    <p>{message.message}</p>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
       </div>
       <ChatInput handleSendMsg={handleSendMsg}/>
     </Container>

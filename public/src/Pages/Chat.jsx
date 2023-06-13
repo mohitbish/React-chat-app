@@ -22,7 +22,7 @@ function Chat() {
           await JSON.parse(localStorage.getItem("chat-app-current-user")) );
       }
     })();
-  }, [])
+  }, [navigate])
 
   useEffect(() => {
     (async () => {
@@ -35,7 +35,7 @@ function Chat() {
         }
       }
     })();
-  }, [currentUser])
+  }, [currentUser,navigate])
 
   return (
     <>

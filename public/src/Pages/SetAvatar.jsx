@@ -28,7 +28,7 @@ export default function SetAvatar() {
             if (!localStorage.getItem("chat-app-current-user"))
             navigate("/login");
         })();
-    }, [])
+    }, [navigate])
 
   
 
@@ -68,7 +68,7 @@ export default function SetAvatar() {
             setAvatars(data);
             setIsLoading(false);
         })();
-    }, [])
+    }, [api])
 
 
 

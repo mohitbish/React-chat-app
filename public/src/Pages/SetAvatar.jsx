@@ -9,71 +9,73 @@ import { setAvatarRoute } from "../Utils/APIRoutes";
 import styled from "styled-components";
 
 export default function SetAvatar() {
-    const api = `https://api.multiavatar.com/4645646`;
-    const navigate = useNavigate();
-    const [avatars, setAvatars] = useState([]);
-    const [isLoading, setIsLoading] = useState(true);
-    const [selectedAvatar, setSelectedAvatar] = useState(undefined);
+  const api = `https://api.multiavatar.com/4645646`; // Avatar Loading API
+  const navigate = useNavigate();
+  const [avatars, setAvatars] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [selectedAvatar, setSelectedAvatar] = useState(undefined);
 
-    const toastOptions = {
-        position: "bottom-right",
-        autoClose: 8000,
-        pauseOnHover: true,
-        draggable: true,
-        theme: "dark",
-    };
+  //Error styling
+  const toastOptions = {
+    position: "bottom-right",
+    autoClose: 8000,
+    pauseOnHover: true,
+    draggable: true,
+    theme: "dark",
+  };
 
-    useEffect(() => {
-        (async () => {
-            if (!localStorage.getItem("chat-app-current-user"))
-            navigate("/login");
-        })();
-    }, [navigate])
+  //Checks for logged in user
+  useEffect(() => {
+    (async () => {
+      if (!localStorage.getItem("chat-app-current-user")) navigate("/login");
+    })();
+  }, [navigate]);
 
-  
+  //sets selected avatar with user id and posts to DB
+  //Error handling and redirection after response from DB
+  const setProfilePicture = async () => {
+    if (selectedAvatar === undefined) {
+      toast.error("Please select an avatar", toastOptions);
+    } else {
+      const user = await JSON.parse(
+        localStorage.getItem("chat-app-current-user")
+      );
 
-    const setProfilePicture = async () => {
-        if (selectedAvatar === undefined) {
-        toast.error("Please select an avatar", toastOptions);
-        } else {
-        const user = await JSON.parse(
-            localStorage.getItem("chat-app-current-user")
+      const { data } = await axios.post(`${setAvatarRoute}/${user._id}`, {
+        image: avatars[selectedAvatar],
+      });
+
+      if (data.isSet) {
+        user.isAvatarImageSet = true;
+        user.avatarImage = data.image;
+        localStorage.setItem("chat-app-current-user", JSON.stringify(user));
+        navigate("/");
+      } else {
+        toast.error("Error setting avatar. Please try again.", toastOptions);
+      }
+    }
+  };
+
+  // selects four random avatar from the API data and stores them as Avatars
+  // buffer.toString() converts the buffer to a string using UTF8 encoding
+  useEffect(() => {
+    (async () => {
+      const data = [];
+      for (let i = 0; i < 4; i++) {
+        const image = await axios.get(
+          `${api}/${Math.round(Math.random() * 1000)}`
         );
-
-        const { data } = await axios.post(`${setAvatarRoute}/${user._id}`, {
-            image: avatars[selectedAvatar],
-        });
-
-        if (data.isSet) {
-            user.isAvatarImageSet = true;
-            user.avatarImage = data.image;
-            localStorage.setItem("chat-app-current-user",JSON.stringify(user));
-            navigate("/");
-        } else {
-            toast.error("Error setting avatar. Please try again.", toastOptions);
-        }
-        }
-    };
-
-    useEffect(() => {
-        (async () => {
-            const data = [];
-            for (let i = 0; i < 4; i++) {
-            const image = await axios.get(
-                `${api}/${Math.round(Math.random() * 1000)}`
-            );
-            const buffer = new Buffer(image.data);
-            data.push(buffer.toString("base64"));
-            }
-            setAvatars(data);
-            setIsLoading(false);
-        })();
-    }, [api])
-
-
+        const buffer = new Buffer(image.data);
+        data.push(buffer.toString("base64"));
+      }
+      setAvatars(data);
+      setIsLoading(false);
+    })();
+  }, [api]);
 
   return (
     <>
+      {/* shows the loading gif while data is fetched from API */}
       {isLoading ? (
         <Container>
           <img src={loader} alt="loader" className="loader" />

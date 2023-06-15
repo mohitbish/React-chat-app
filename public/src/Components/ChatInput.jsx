@@ -11,12 +11,14 @@ export default function ChatInput({ handleSendMsg }) {
     setShowEmojiPicker(!showEmojiPicker);
   };
 
+  //adds clicked emoji to message
   const handleEmojiClick = (event, emojiObject) => {
     let message = msg;
     message += emojiObject.emoji;
     setMsg(message);
   };
 
+  //sends msg as parameter and clears input from next messager
   const sendChat = (event) => {
     event.preventDefault();
     if (msg.length > 0) {
@@ -48,6 +50,7 @@ export default function ChatInput({ handleSendMsg }) {
   );
 }
 
+//styling
 const Container = styled.div`
   display: grid;
   align-items: center;

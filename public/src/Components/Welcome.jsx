@@ -2,19 +2,16 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import Robot from "../Assets/robot.gif";
 
- function Welcome() {
-
+function Welcome() {
   const [userName, setUserName] = useState("");
 
   useEffect(() => {
     (async () => {
-        setUserName(
-            await JSON.parse(
-              localStorage.getItem("chat-app-current-user")
-            ).username
-          );
+      setUserName(
+        await JSON.parse(localStorage.getItem("chat-app-current-user")).username
+      );
     })();
-  }, [])
+  }, []);
 
   return (
     <Container>
@@ -41,4 +38,4 @@ const Container = styled.div`
   }
 `;
 
-export default  Welcome;
+export default Welcome;

@@ -113,6 +113,7 @@ export default function SetAvatar() {
   );
 }
 
+//styling
 const Container = styled.div`
   display: flex;
   justify-content: center;

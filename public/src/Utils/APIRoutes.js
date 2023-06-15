@@ -1,4 +1,5 @@
-export const host = "http://localhost:8000";
+//Stores routes for Server side 
+export const host = "http://localhost:8000"; // Server 
 export const loginRoute = `${host}/api/auth/login`;
 export const registerRoute = `${host}/api/auth/register`;
 export const setAvatarRoute = `${host}/api/auth/setavatar`;

@@ -6,13 +6,12 @@ import { v4 as uuidv4 } from "uuid";
 import axios from "axios";
 import { sendMessageRoute, recieveMessageRoute } from "../Utils/APIRoutes";
 
-
 export default function ChatContainer({ currentChat, socket }) {
   const [messages, setMessages] = useState([]);
   const scrollRef = useRef();
   const [arrivalMessage, setArrivalMessage] = useState(null);
 
-
+  //gets user details from LC => posts to DB => gets relevant messages data from DB => updated const
   useEffect(() => {
     (async () => {
       const data = await JSON.parse(
@@ -24,19 +23,20 @@ export default function ChatContainer({ currentChat, socket }) {
       });
       setMessages(response.data);
     })();
-  }, [currentChat])
+  }, [currentChat]);
 
+  //
   useEffect(() => {
     const getCurrentChat = async () => {
       if (currentChat) {
-        await JSON.parse(
-          localStorage.getItem("chat-app-current-user")
-        )._id;
+        await JSON.parse(localStorage.getItem("chat-app-current-user"))._id;
       }
     };
     getCurrentChat();
   }, [currentChat]);
 
+  //pushes the chat input from user to DB and Socket
+  //updates the messages const
   const handleSendMsg = async (msg) => {
     const data = await JSON.parse(
       localStorage.getItem("chat-app-current-user")
@@ -57,6 +57,7 @@ export default function ChatContainer({ currentChat, socket }) {
     setMessages(msgs);
   };
 
+  //recives messsages from socket and updates the arrivalmessages const
   useEffect(() => {
     if (socket.current) {
       socket.current.on("msg-recieve", (msg) => {
@@ -65,10 +66,12 @@ export default function ChatContainer({ currentChat, socket }) {
     }
   }, [socket]);
 
+  //
   useEffect(() => {
     arrivalMessage && setMessages((prev) => [...prev, arrivalMessage]);
   }, [arrivalMessage]);
 
+  //
   useEffect(() => {
     scrollRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);

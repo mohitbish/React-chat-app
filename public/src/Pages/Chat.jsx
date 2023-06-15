@@ -37,7 +37,8 @@ export default function Chat() {
     }
   }, [currentUser]);
 
-  //verifies avatar image data from Db and redirects
+  //verifies avatar image  data from Db and redirects
+  //sets contacts to received data 
   useEffect(() => {
     (async () => {
       if (currentUser) {

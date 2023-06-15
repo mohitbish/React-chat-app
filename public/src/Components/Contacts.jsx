@@ -2,11 +2,12 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import Logo from "../Assets/logo.svg";
 
- export default function Contacts({ contacts, changeChat }) {
+export default function Contacts({ contacts, changeChat }) {
   const [currentUserName, setCurrentUserName] = useState(undefined);
   const [currentUserImage, setCurrentUserImage] = useState(undefined);
   const [currentSelected, setCurrentSelected] = useState(undefined);
 
+  //gets user details from local storage
   useEffect(() => {
     (async () => {
       const data = await JSON.parse(
@@ -17,10 +18,12 @@ import Logo from "../Assets/logo.svg";
     })();
   }, []);
 
+  //Changes const to data from selected contact
   const changeCurrentChat = (index, contact) => {
     setCurrentSelected(index);
     changeChat(contact);
   };
+
   return (
     <>
       {currentUserImage && currentUserImage && (
@@ -68,6 +71,8 @@ import Logo from "../Assets/logo.svg";
     </>
   );
 }
+
+//styling
 const Container = styled.div`
   display: grid;
   grid-template-rows: 10% 75% 15%;
@@ -154,5 +159,3 @@ const Container = styled.div`
     }
   }
 `;
-
-

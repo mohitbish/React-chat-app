@@ -1,5 +1,8 @@
 const Messages = require("../Model/MessageModel");
 
+//gets the messages using to and from from request
+//sorts them by timestamp
+//send sender detials and text
 module.exports.getMessages = async (req, res, next) => {
   try {
     const { from, to } = req.body;
@@ -22,6 +25,7 @@ module.exports.getMessages = async (req, res, next) => {
   }
 };
 
+//creats new message in Db
 module.exports.addMessage = async (req, res, next) => {
   try {
     const { from, to, message } = req.body;

@@ -8,13 +8,14 @@ import Contacts from "../Components/Contacts";
 import Welcome from "../Components/Welcome";
 import ChatContainer from "../Components/ChatContainer";
 
-function Chat() {
+export default function Chat() {
   const navigate = useNavigate();
   const socket = useRef();
   const [contacts, setContacts] = useState([]);
   const [currentUser, setCurrentUser] = useState(undefined);
   const [currentChat, setCurrentChat] = useState(undefined);
 
+  //checks if a registered user is logged in already and redirects
   useEffect(() => {
     (async () => {
       if (!localStorage.getItem("chat-app-current-user")) {
@@ -27,6 +28,8 @@ function Chat() {
     })();
   }, [navigate]);
 
+  //sets up socket connection to host and send user details
+  //resets if currentuser changes
   useEffect(() => {
     if (currentUser) {
       socket.current = io(host);
@@ -34,6 +37,7 @@ function Chat() {
     }
   }, [currentUser]);
 
+  //verifies avatar image data from Db and redirects
   useEffect(() => {
     (async () => {
       if (currentUser) {
@@ -47,6 +51,7 @@ function Chat() {
     })();
   }, [currentUser, navigate]);
 
+  //changes the chat to the message from selected contact
   const handleChatChange = (chat) => {
     setCurrentChat(chat);
   };
@@ -56,6 +61,7 @@ function Chat() {
       <Container>
         <div className="container">
           <Contacts contacts={contacts} changeChat={handleChatChange} />
+          {/* Checks the current chat variable to dislpay components */}
           {currentChat === undefined ? (
             <Welcome />
           ) : (
@@ -67,6 +73,7 @@ function Chat() {
   );
 }
 
+//styling
 const Container = styled.div`
   height: 100vh;
   width: 100vw;
@@ -87,5 +94,3 @@ const Container = styled.div`
     }
   }
 `;
-
-export default Chat;

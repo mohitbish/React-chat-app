@@ -12,3 +12,5 @@ Server setup =>
     npm init
     npm i express mongoose nodemon socket.io bcrypt cors dotenv
     yarn add socket.io
+
+

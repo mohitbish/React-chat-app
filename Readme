@@ -1,4 +1,4 @@
-Public 
+React APP Setup =>
     npx create-react-app chat-app
     yarn add axios styled-components react-router-dom
     yarn add react-toastify
@@ -8,8 +8,7 @@ Public
     yarn add socket.io-client
     yarn add uuid
 
-Server
+Server setup =>
     npm init
     npm i express mongoose nodemon socket.io bcrypt cors dotenv
-    //add {"start": "nodemon index.js"} to scripts in package.json
     yarn add socket.io

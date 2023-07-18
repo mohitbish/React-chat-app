@@ -85,6 +85,9 @@ export default function Login() {
           <button type="submit">Log In</button>
           <span>
             Don't have an account ? <Link to="/register">Create One.</Link>
+          </span><span>
+           username: Mohit
+           password: 12345678
           </span>
         </form>
       </FormContainer>

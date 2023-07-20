@@ -61,6 +61,25 @@ export default function Login() {
     }
   };
 
+ const handledemo = async()=>{
+  const username = "Mohit"
+  const password = "12345678"
+  const { data } = await axios.post(loginRoute, {
+    username,
+    password,
+  });if (data.status === false) {
+    toast.error(data.msg, toastOptions);
+  }
+  if (data.status === true) {
+    localStorage.setItem(
+      "chat-app-current-user",
+      JSON.stringify(data.user)
+    );
+
+    navigate("/");
+  }
+ }
+
   return (
     <>
       <FormContainer>
@@ -85,10 +104,9 @@ export default function Login() {
           <button type="submit">Log In</button>
           <span>
             Don't have an account ? <Link to="/register">Create One.</Link>
-          </span><span>
-           username: Mohit
-           password: 12345678
           </span>
+          <button type="submit" onClick={()=>handledemo}>Demo Login</button>
+          
         </form>
       </FormContainer>
       <ToastContainer />

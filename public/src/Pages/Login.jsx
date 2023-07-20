@@ -64,6 +64,7 @@ export default function Login() {
  const handledemo = async()=>{
   const username = "Mohit"
   const password = "12345678"
+  console.log(username, password);
   const { data } = await axios.post(loginRoute, {
     username,
     password,
@@ -105,9 +106,8 @@ export default function Login() {
           <span>
             Don't have an account ? <Link to="/register">Create One.</Link>
           </span>
-          <button onClick={()=>handledemo}>Demo Login</button>
-          
         </form>
+        <button onClick={()=>handledemo()}>Demo Login</button>
       </FormContainer>
       <ToastContainer />
     </>

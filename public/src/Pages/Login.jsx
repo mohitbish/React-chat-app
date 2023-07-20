@@ -105,7 +105,7 @@ export default function Login() {
           <span>
             Don't have an account ? <Link to="/register">Create One.</Link>
           </span>
-          <button type="submit" onClick={()=>handledemo}>Demo Login</button>
+          <button onClick={()=>handledemo}>Demo Login</button>
           
         </form>
       </FormContainer>

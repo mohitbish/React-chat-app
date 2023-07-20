@@ -42,6 +42,7 @@ export default function Login() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     if (validateForm()) {
+      toast.success("Loading-data",toastOptions)
       const { username, password } = values;
       const { data } = await axios.post(loginRoute, {
         username,
@@ -51,7 +52,6 @@ export default function Login() {
         toast.error(data.msg, toastOptions);
       }
       if (data.status === true) {
-        toast.success("Loading-data",toastOptions)
         localStorage.setItem(
           "chat-app-current-user",
           JSON.stringify(data.user)
@@ -63,6 +63,7 @@ export default function Login() {
   };
 
  const handledemo = async()=>{
+  toast.success("Loading-data",toastOptions)
   const username = "Mohit"
   const password = "12345678"
   console.log(username, password);

@@ -86,6 +86,7 @@ export default function Register() {
         toast.error(data.msg, toastOptions);
       }
       if (data.status === true) {
+        toast.success("Registering",toastOptions)
         localStorage.setItem(
           "chat-app-current-user",
           JSON.stringify(data.user)

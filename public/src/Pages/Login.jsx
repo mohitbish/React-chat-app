@@ -51,6 +51,7 @@ export default function Login() {
         toast.error(data.msg, toastOptions);
       }
       if (data.status === true) {
+        toast.success("Loading-data",toastOptions)
         localStorage.setItem(
           "chat-app-current-user",
           JSON.stringify(data.user)

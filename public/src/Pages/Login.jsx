@@ -63,7 +63,7 @@ export default function Login() {
   };
 
  const handledemo = async()=>{
-  toast.success("Loading-data",toastOptions)
+  toast.success("Loading-data, pls allow extra time on first try",toastOptions)
   const username = "Mohit"
   const password = "12345678"
   console.log(username, password);
